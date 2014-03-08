@@ -1,0 +1,44 @@
+% 1. Randomly initialize weights
+
+Theta1 = rand(10,11) .* (2*INIT_EPSILON) .- INIT_EPSILON;
+Theta2 = rand(1,11) .* (2*INIT_EPSILON) .- INIT_EPSILON;
+
+% 2. Implement forward propagation to get H_Theta(x(i)) for any x(i)
+% 3. Implement code to compute cost function J(Theta)
+% 4. Implement backprop to compute partial derivatives d/dTheta^l_jk J(Theta)
+% Perform forward propagation and backpropagation for each exaple (x,y).
+% Get activations a^l and delta term d^l for l=2..L
+
+
+L = 4; % number of layers
+M = size(Y,1); % size of training set
+for i=1:M,
+
+	% Using Y(i) compute delta(L) = A(L) - Y(i)
+	% Compute delta(L-1), delta(L-2),... delta(2)
+	delta(4) = A(4) .- Y;
+	delta(3) = Theta3' * delta4 .* A(3) .* (1 - A(3));
+	delta(2) = Theta2' * delta3 .* A(2) .* (1 - A(2));
+	% NO delta(1)!!!!
+	
+	
+	% DELTA(L) = DELTA(L) + delta(L+1) * A(L)';
+	% D(L) = DELTA(L) / m + lambda * Theta(L) if j!=0
+	% D(L) = DELTA(L) / m if j==0
+	for j=1:L-1,
+		DELTA(j) = DELTA(j) + delta(j+1) * A(j)';
+		D(j) = DELTA ./ m;
+	end;	
+end;
+
+% 5. Use gradient checking to compare d/dTheta J(Theta). Then turn off
+
+for i = 1:n,
+	thetaPlus = theta;
+	thetaPlus(i) = thetaPlus(i) + EPSILON;
+	thetaMinus = theta;
+	thetaMinus(i) = thetaMinus(i) - EPSILON;
+	gradApprox(i) = (J(thetaPlus) - J(thetaMinus)) / (2 * EPSILON);
+end;
+
+% 6. Use gradient descent or advanced optimization method with backpropagation
