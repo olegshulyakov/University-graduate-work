@@ -17,17 +17,20 @@ for power = minPower:maxPower,
 	
 	l = 0;
 	Results = zeros(n,13);    
-	m = size(Ytr,1);
+	m = size(Ytr,2);
 	
 	for i = 1:n,		
 		Results(i,1) = l;		
-		for j = 1:m,		
-			Theta = regulirizedLinearRegression(Xtr,Ytr(j),l);						
-			J = costFunction(Xtr,Ytr(j),Theta);
+		for j = 1:m,	
+			Y = Ytr(:,j);
+			Theta = regulirizedLinearRegression(Xtr,Y,l);						
+			J = costFunction(Xtr,Y,Theta);
 			Results(i,1 + j) = J;
-			J = costFunction(Xcv,Ycv(j),Theta);
+			Y = Ycv(:,j);
+			J = costFunction(Xcv,Y,Theta);
 			Results(i,5 + j) = J;
-			J = costFunction(Xtst,Ytst(j),Theta);
+			Y = Ytst(:,j);
+			J = costFunction(Xtst,Y,Theta);
 			Results(i,9 + j) = J;					
 		end;		
 		if l == 0,
