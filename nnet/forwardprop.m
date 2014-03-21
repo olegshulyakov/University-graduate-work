@@ -1,9 +1,21 @@
-function activations = forwardprop(inputs, activations, weights)
-inputs = inputs(:) ;
-L = length(activations) ;
-activations{1}(2:length(activations{1})) = inputs ;
-for ii = 2:(L - 1)
-  activations{ii}(2:length(activations{ii})) = activate(weights{ii - 1} * activations{ii - 1}) ;
-endfor
-activations{L} = activate(weights{L - 1} * activations{L - 1}) ;
+function activations = forwardprop(inputs, weights)
+% =================================================
+% Calculate feedforward neural network output value 
+% For specified inputs and with specified weights
+% =================================================
+
+% Gets number of layers
+numberOfLayers = length(weights);
+% Initialize activations values
+activations = cell(numberOfLayers, 1);
+% Calculate value in first layer
+activations{1} = [1; inputs'];
+% Calculate value in each hidden layer
+for layer = 2:(numberOfLayers - 1),
+	layerValue = activate(weights{layer - 1} * activations{layer - 1});
+	activations{layer} = [1; layerValue];
+end;
+% Calculate value in last layer (no bias)
+layerValue = activate(weights{numberOfLayers - 1} * activations{numberOfLayers - 1});
+activations{numberOfLayers} = layerValue;
 endfunction

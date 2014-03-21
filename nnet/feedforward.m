@@ -1,10 +1,19 @@
 function output = feedforward(inputs, weights)
-%inputs = inputs(:) ;
-L = length(weights); 
-activations = cell(L, 1); 
-activations{1} = [1 ; inputs];
-for ii = 2:(L - 1)
-  activations{ii} = [1 ; activate(weights{ii - 1} * activations{ii - 1})] ;
-endfor
-output = activate(weights{L - 1} * activations{L - 1}) ;
+% =================================================
+% Calculate feedforward neural network output value 
+% For specified inputs and with specified weights
+% =================================================
+
+% Gets number of layers
+numberOfLayers = length(weights);
+% Calculate value in first layer
+layerValue = [1; inputs'];
+% Calculate value in each hidden layer
+for layer = 2:(numberOfLayers - 1),
+	layerValue = activate(weights{layer - 1} * layerValue);
+	layerValue = [1; layerValue];
+end;
+% Calculate value in last layer (no bias)
+layerValue = activate(weights{numberOfLayers - 1} * layerValue);
+output = layerValue;
 endfunction

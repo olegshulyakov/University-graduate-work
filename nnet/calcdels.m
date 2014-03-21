@@ -1,10 +1,18 @@
 function deltas = calcdels(target, activations, weights)
-target = target(:) ;
-L = length(activations) ;
-deltas = cell(L, 1) ;
-deltas{L} = activations{L} .* (1 - activations{L}) .* (target - activations{L}) ;
-for ii = (L - 1):-1:2
-  s = length(activations{ii}) ;
-  deltas{ii} = activations{ii}(2:s) .* (1 - activations{ii}(2:s)) .* (deltas{ii + 1}' * weights{ii}(:, 2:s))' ;
+% =================================================
+% Calculate deltas for update 
+% feedforward neural network layer`s weights
+% For specified inputs and with specified weights
+% =================================================
+
+% Gets number of layers
+numberOfLayers = length(weights);
+% Initialize deltas
+deltas = cell(numberOfLayers, 1);
+% Calculate delta for last layer
+deltas{numberOfLayers} = activations{numberOfLayers} .* (1 - activations{numberOfLayers}) .* (target - activations{numberOfLayers});
+for layer = (numberOfLayers - 1):-1:2
+  s = length(activations{layer});
+  deltas{layer} = activations{layer}(2:s) .* (1 - activations{layer}(2:s)) .* (deltas{layer + 1}' * weights{layer}(:, 2:s))';
 endfor
 endfunction

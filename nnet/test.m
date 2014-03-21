@@ -4,16 +4,16 @@ inputs = [0 0; 0 1; 1 0; 1 1];
 targets = [0; 1; 1; 0];
 layers = [2; 3; 1];
 
-[a,w] = makenet(layers);
-
-for i=1:4,
-	inputs
-	a = forwardprop(inputs(i),a,w);
-	w = backprop(targets(i),a,w);
-end
+trainingSize = size(targets);
+w = makenet(layers);
+for k=1:10000,
+for i=1:trainingSize,
+	a = forwardprop(inputs(i,:),w);
+	w = backprop(targets(i,:),a,w);
+end;
+end;
 a
 w
-for i=1:4,
-	inputs
-	feedforward(inputs(i),w)
+for i=1:trainingSize,
+	feedforward(inputs(i,:),w)
 end
