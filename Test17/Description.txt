@@ -1,0 +1,9 @@
+input 5
+output 1
+power 1 - 20
+lambda
+
+multiple output
+
+input as percentage - 1
+only HIGH LOW
