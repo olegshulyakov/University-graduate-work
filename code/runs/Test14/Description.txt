@@ -1,7 +1,0 @@
-input 25
-output 1
-power 1 - 18
-lambda
-
-only one output
-only HIGH LOW

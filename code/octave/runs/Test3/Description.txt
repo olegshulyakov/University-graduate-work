@@ -1,0 +1,6 @@
+input 5
+output 1
+power 1 - 20
+lambda
+
+only one output
