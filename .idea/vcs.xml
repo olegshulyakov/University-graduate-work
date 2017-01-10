@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/code/Apache-SystemML" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/docs/coursera_ml_and_data_analysis_spec" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/docs/everpeace-ml-class-assignments" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/docs/schneems-Octave" vcs="Git" />
+  </component>
+</project>
